@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Автосервис</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Автосервис">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0a0a0a;--fg:#fff;--mut:#9a9a9a;--card:#161616;--line:rgba(255,255,255,.85);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 96px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:300 14px/1.5 Inter,"Helvetica Neue",Arial,sans-serif;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+.up{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:400}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:10;border-bottom:1px solid var(--line)}
+.logo a{color:var(--fg);text-decoration:none}.logo{text-align:center;padding:14px 0 6px;font-weight:500;letter-spacing:.35em;font-size:13px}
+nav{display:flex;gap:22px;overflow-x:auto;padding:8px 16px 10px;justify-content:flex-start;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;color:var(--fg);text-decoration:none}
+.search{display:flex;border-top:1px solid #333}
+.search input{flex:1;border:0;padding:10px 16px;background:transparent;outline:0;text-transform:uppercase;font-size:11px;letter-spacing:.14em}
+main{max-width:1200px;margin:0 auto}
+section{padding:56px 16px;border-bottom:1px solid var(--line)}
+h2{font-weight:300;font-size:22px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 28px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:760px){.grid.hero{grid-template-columns:repeat(4,1fr)}.grid.p{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:18px 10px;border:0;cursor:pointer;position:relative;overflow:hidden;text-decoration:none;color:var(--fg)}
+.card .n{position:absolute;top:30%;left:0;right:0;font-size:68px;font-weight:200;letter-spacing:.05em;opacity:.9}
+.card:hover{background:#e8e8e8}
+.card small{display:block;color:var(--mut);margin-top:4px;text-transform:none;letter-spacing:.04em;font-size:12px}
+.hero-t{text-align:center;padding:48px 16px 48px;border-bottom:1px solid var(--line)}
+.hero-t h1{font-weight:200;font-size:clamp(30px,7vw,64px);letter-spacing:.18em;margin:0 0 10px;text-transform:uppercase}
+.hero-t p{margin:0;color:var(--mut)}
+.bk{max-width:640px;margin:0 auto}
+.lab{margin:22px 0 10px;color:var(--mut)}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{border:1px solid var(--fg);background:var(--bg);padding:10px 14px;cursor:pointer;white-space:nowrap;text-transform:uppercase;font-size:11px;letter-spacing:.1em}
+.chip.on{background:var(--fg);color:var(--bg)}
+.chip:disabled{border-color:#333;color:#555;text-decoration:line-through;cursor:not-allowed}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:560px){.slots{grid-template-columns:repeat(5,1fr)}}
+.f{display:block;width:100%;border:0;border-bottom:1px solid var(--fg);background:transparent;padding:12px 0;margin-bottom:14px;outline:0;border-radius:0}
+.btn{width:100%;background:var(--fg);color:var(--bg);border:1px solid var(--fg);padding:16px;cursor:pointer;text-transform:uppercase;letter-spacing:.2em;font-size:12px}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.msg{margin-top:14px;padding:12px;border:1px solid var(--fg);text-align:center;display:none}
+.chat{max-width:640px;margin:0 auto;border:1px solid var(--fg);display:flex;flex-direction:column;height:480px}
+#log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.b{max-width:82%;padding:10px 14px;font-size:13px}
+.b.bot{background:var(--card);align-self:flex-start}
+.b.me{background:var(--fg);color:var(--bg);align-self:flex-end}
+#chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 10px}
+.cf{display:flex;border-top:1px solid var(--fg)}
+.cf input{flex:1;border:0;padding:14px 16px;background:transparent;outline:0}
+.cf button{border:0;border-left:1px solid var(--fg);background:var(--fg);color:var(--bg);padding:0 20px;cursor:pointer}
+.work{aspect-ratio:1;background:var(--card);overflow:hidden}.work svg{width:100%;height:100%;display:block}
+.cap{padding:10px 0 0}.cap b{font-weight:400;text-transform:uppercase;letter-spacing:.1em;font-size:12px;display:block}.cap span{color:var(--mut);font-size:12px}
+.rv{border-top:1px solid var(--fg);padding:20px 0;max-width:640px;margin:0 auto}
+.rv p{margin:8px 0;font-size:15px}
+footer{padding:36px 16px;text-align:center;color:var(--mut)}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><a href="https://yandex.ru/maps/org/avtoservis/206276061492/?yclid=" target="_blank" rel="noopener">Автосервис</a></div>
+  <nav class="up">
+    <a href="#top">Главная</a><a href="#booking">Запись на сервис</a><a href="#ai">AI-помощник</a><a href="#reviews">Отзывы</a>
+  </nav>
+</header>
+<main id="top">
+  <div class="hero-t"><h1>Автосервис</h1><p>Диагностика · Ремонт · Обслуживание. Ежедневно 09:00–18:00, кроме воскресенья.<br><a href="tel:+79250565107" style="color:var(--fg)">+7 (925) 056-51-07</a></p></div>
+
+  <section id="booking">
+    <h2>Запись на сервис</h2>
+    <div class="bk">
+      <div class="lab up">Дата</div><div class="days" id="days"></div>
+      <div class="lab up">Время</div><div class="slots" id="slots"></div>
+      <div class="lab up">Ваши данные</div>
+      <input class="f" id="name" placeholder="ФИО" autocomplete="name">
+      <input class="f" id="phone" placeholder="Телефон +7…" type="tel" autocomplete="tel">
+      <textarea class="f" id="comm" rows="2" placeholder="Описание поломки или услуги"></textarea>
+      <button class="btn" id="send">Записаться</button>
+      <div class="msg" id="bmsg"></div>
+    </div>
+  </section>
+
+  <section id="ai">
+    <h2>AI-помощник</h2>
+    <div class="chat">
+      <div id="log"></div><div id="chips"></div>
+      <form class="cf" id="cf"><input id="ci" placeholder="Напишите сообщение…" autocomplete="off"><button class="up">Отпр.</button></form>
+    </div>
+  </section>
+
+  <section id="reviews" style="border:0">
+    <h2>Отзывы</h2>
+    <div class="rv"><span class="up">Алексей М. — BMW X5</span><p>Нашли плавающую неисправность, которую не могли найти в двух сервисах. Всё прозрачно, с фотоотчётом.</p></div>
+    <div class="rv"><span class="up">Марина К. — Audi A4</span><p>Записалась через чат за минуту. Приехала ровно ко времени — машина готова раньше срока.</p></div>
+    <div class="rv"><span class="up">Игорь С. — Mercedes E-class</span><p>Аккуратная работа, чисто в боксе, честные цены. Рекомендую.</p></div>
+  </section>
+</main>
+<footer class="up"><a href="https://yandex.ru/maps/org/avtoservis/206276061492/?yclid=" target="_blank" rel="noopener" style="color:var(--fg);text-decoration:none">Автосервис</a> · <a href="tel:+79250565107" style="color:var(--fg);text-decoration:none">+7 (925) 056-51-07</a></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+/* ---------- PWA manifest (inline) ---------- */
+try{
+  const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#0a0a0a"/><text x="256" y="320" font-size="200" fill="#fff" text-anchor="middle" font-family="Arial" font-weight="200">77</text></svg>');
+  const mf={name:"Автосервис",short_name:"Автосервис",display:"standalone",background_color:"#0a0a0a",theme_color:"#0a0a0a",start_url:".",icons:[{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any"}]};
+  const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));document.head.appendChild(l);
+  const a=document.createElement('link');a.rel='apple-touch-icon';a.href=icon;document.head.appendChild(a);
+}catch(e){}
+
+/* ---------- Booking core (защита от пересечений) ---------- */
+const T=['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'];
+let bk=[];try{bk=JSON.parse(localStorage.getItem('bk77')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('bk77',JSON.stringify(bk))}catch(e){}};
+const seed=(d,t)=>{let h=0;for(const c of d+t)h=(h*31+c.charCodeAt(0))%97;return h%4===0};
+const taken=(d,t)=>seed(d,t)||bk.some(b=>b.d===d&&b.t===t);
+const past=(d,t)=>new Date(d+'T'+t+':00')<new Date();
+const free=d=>T.filter(t=>!taken(d,t)&&!past(d,t));
+const iso=x=>x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
+function days(){const r=[];const x=new Date();while(r.length<7){if(x.getDay()!==0&&(free(iso(x)).length||r.length))r.push({v:iso(x),l:x.toLocaleDateString('ru',{weekday:'short',day:'numeric',month:'short'})});x.setDate(x.getDate()+1)}return r}
+function book(d,t,name,phone,comm){if(taken(d,t)||past(d,t))return false;bk.push({d,t,name,phone,comm});save();return true}
+const lbl=d=>new Date(d+'T12:00').toLocaleDateString('ru',{weekday:'long',day:'numeric',month:'long'});
+const okPhone=p=>p.replace(/\D/g,'').length>=10;
+
+/* ---------- Classic form ---------- */
+let sel={d:days()[0].v,t:null};
+function renderBk(){
+  $('#days').innerHTML='';days().forEach(o=>{const b=document.createElement('button');b.className='chip'+(o.v===sel.d?' on':'');b.textContent=o.l;b.onclick=()=>{sel={d:o.v,t:null};renderBk()};$('#days').append(b)});
+  $('#slots').innerHTML='';T.forEach(t=>{const b=document.createElement('button');b.className='chip'+(t===sel.t?' on':'');b.textContent=t;b.disabled=taken(sel.d,t)||past(sel.d,t);b.onclick=()=>{sel.t=t;renderBk()};$('#slots').append(b)});
+}
+function note(t){const m=$('#bmsg');m.style.display='block';m.textContent=t}
+$('#send').onclick=()=>{
+  const n=$('#name').value.trim(),p=$('#phone').value.trim(),c=$('#comm').value.trim();
+  if(!sel.t)return note('Выберите время');
+  if(n.length<2)return note('Укажите ФИО');
+  if(!okPhone(p))return note('Укажите корректный телефон');
+  if(!book(sel.d,sel.t,n,p,c)){renderBk();return note('Это время уже занято. Выберите другое.')}
+  note('Вы записаны: '+lbl(sel.d)+', '+sel.t+'. Мы позвоним для подтверждения.');
+  sel.t=null;['#name','#phone','#comm'].forEach(i=>$(i).value='');renderBk();renderChips();
+};
+renderBk();
+
+/* ---------- AI chat (диалоговый сценарий) ---------- */
+let step='problem',D={};
+const log=$('#log');
+function say(t,c){const d=document.createElement('div');d.className='b '+c;d.textContent=t;log.append(d);log.scrollTop=log.scrollHeight}
+function chips(list){const c=$('#chips');c.innerHTML='';list.forEach(o=>{const b=document.createElement('button');b.className='chip';b.textContent=o.l;b.onclick=()=>handle(o.l,o.v);c.append(b)})}
+function renderChips(){if(step==='date')chips(days());else if(step==='time')chips(free(D.d).map(t=>({l:t,v:t})));else if(step==='problem')chips(['Диагностика','Замена масла','Тормоза','Стук в подвеске'].map(x=>({l:x,v:x})));else chips([])}
+function bot(t){say(t,'bot');renderChips()}
+function handle(text,val){
+  text=(text||'').trim();if(!text)return;say(text,'me');
+  if(step==='problem'){D.problem=text;step='date';bot('Понял. На какую дату вас записать?')}
+  else if(step==='date'){const o=days().find(x=>x.v===val);if(!o)return bot('Пожалуйста, выберите дату из предложенных.');D.d=o.v;
+    if(!free(D.d).length)return bot('На этот день свободных окон нет, выберите другой.');step='time';bot('Свободное время на '+lbl(D.d)+':')}
+  else if(step==='time'){if(!val||!free(D.d).includes(val))return bot('Выберите время из доступных.');D.t=val;step='name';bot('Как вас зовут? (ФИО)')}
+  else if(step==='name'){if(text.length<2)return bot('Назовите, пожалуйста, имя.');D.name=text;step='phone';bot('Ваш номер телефона?')}
+  else if(step==='phone'){if(!okPhone(text))return bot('Не похоже на номер телефона. Попробуйте ещё раз.');D.phone=text;
+    if(book(D.d,D.t,D.name,D.phone,D.problem)){step='done';bot('Готово! '+D.name+', ждём вас '+lbl(D.d)+' в '+D.t+'. Причина обращения: '+D.problem+'. Мы позвоним для подтверждения.');chips([{l:'Новая запись',v:'r'}]);renderBk()}
+    else{step='time';bot('К сожалению, это время только что заняли. Выберите другое:')}}
+  else if(step==='done'){D={};step='problem';bot('Опишите, что случилось с автомобилем или какая услуга нужна.')}
+}
+$('#cf').onsubmit=e=>{e.preventDefault();const v=$('#ci').value;$('#ci').value='';
+  if(step==='date'||step==='time'){const o=step==='date'?days().find(x=>x.l.toLowerCase()===v.trim().toLowerCase()):{v:v.trim()};return handle(v,o&&o.v)}
+  handle(v,v)};
+bot('Здравствуйте! Я помощник автосервиса. Опишите, что случилось с автомобилем или какая услуга нужна.');
+
+</script>
+</body>
+</html>
